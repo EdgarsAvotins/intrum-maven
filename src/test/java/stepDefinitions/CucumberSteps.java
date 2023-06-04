@@ -23,6 +23,11 @@ public class CucumberSteps {
         Thread.sleep(500);
     }
 
+    @Given("I do something else")
+    public static void i_do_something_else() {
+        clickWrongButton();
+    }
+
     @When("I wait")
     public static void i_wait() throws InterruptedException {
         Thread.sleep(3000);

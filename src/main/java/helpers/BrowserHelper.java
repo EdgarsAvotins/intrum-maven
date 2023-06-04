@@ -3,6 +3,7 @@ package helpers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 
 public class BrowserHelper {
@@ -10,10 +11,13 @@ public class BrowserHelper {
 
     public static void initializeDriver() {
         if (driverThreadLocal.get() == null) {
+            FirefoxOptions options = new FirefoxOptions();
+            options.setHeadless(true); //DEPRECATED?
+//            options.addArguments("--headless=new"); // Doesn't work, version too low?
             System.out.println("===INITIALIZING");
 //            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
 //            driver = new ChromeDriver();
-            driverThreadLocal.set(new FirefoxDriver());
+            driverThreadLocal.set(new FirefoxDriver(options));
         }
     }
 
