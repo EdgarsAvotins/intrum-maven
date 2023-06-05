@@ -7,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.Objects;
 
-
 public class BrowserHelper {
     private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 

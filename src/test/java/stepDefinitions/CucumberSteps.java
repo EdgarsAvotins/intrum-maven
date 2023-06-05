@@ -6,7 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 import static helpers.BrowserHelper.*;
-import static pageObjects.HomePage.*;
+import static pageObjects.FormPage.*;
 
 public class CucumberSteps {
     @Before
@@ -20,12 +20,14 @@ public class CucumberSteps {
         rejectCookies();
         clickFormButton();
         fillName("MrAnderson");
-        Thread.sleep(500);
-    }
-
-    @Given("I do something else")
-    public static void i_do_something_else() {
-        clickWrongButton();
+        fillPersonalCodeField("aabbcc");
+        fillIssueNumberField("aabbcc");
+        fillContactNumberField("aabbcc");
+        fillEmailAddressField("aabbcc");
+        fillPersonalAddressField("aabbcc");
+        fillCommentField("aabbcc");
+        chooseAnswerOptionEmail();
+        Thread.sleep(1500);
     }
 
     @When("I wait")
