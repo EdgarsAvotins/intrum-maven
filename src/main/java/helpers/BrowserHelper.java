@@ -5,19 +5,29 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import java.util.Objects;
+
 
 public class BrowserHelper {
     private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     public static void initializeDriver() {
         if (driverThreadLocal.get() == null) {
-            FirefoxOptions options = new FirefoxOptions();
-            options.setHeadless(true); //DEPRECATED?
-//            options.addArguments("--headless=new"); // Doesn't work, version too low?
-            System.out.println("===INITIALIZING");
-//            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
-//            driver = new ChromeDriver();
-            driverThreadLocal.set(new FirefoxDriver(options));
+            String chosenBrowser = System.getProperty("browser");
+            if (Objects.equals(chosenBrowser, "chrome")) {
+                System.out.println("===INITIALIZING CHROME");
+                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+                driverThreadLocal.set(new ChromeDriver());
+            } else if (Objects.equals(chosenBrowser, "firefox-headless")) {
+                System.out.println("===INITIALIZING FIREFOX HEADLESS");
+                FirefoxOptions options = new FirefoxOptions();
+                options.setHeadless(true); //DEPRECATED?
+//                options.addArguments("--headless=new"); // Doesn't work, version too low?
+                driverThreadLocal.set(new FirefoxDriver(options));
+            } else {
+                System.out.println("===INITIALIZING FIREFOX");
+                driverThreadLocal.set(new FirefoxDriver());
+            }
         }
     }
 
