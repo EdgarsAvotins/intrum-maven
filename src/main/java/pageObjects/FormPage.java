@@ -17,10 +17,9 @@ public class FormPage {
     private static final Element issueNumberFieldBox = new Element(By.xpath("//div[contains(@class,'lietasnumursnavobligāts')]"));
     private static final Element contactNumberFieldBox = new Element(By.xpath("//div[contains(@class,'kontakttālrunis')]"));
     private static final Element emailAddressFieldBox = new Element(By.xpath("//div[contains(@class,'epastaadrese')]"));
-    private static final Element personalAddressFieldBox = new Element(By.xpath("//div[contains(@class,'adrese')]"));
+    private static final Element personalAddressFieldBox = new Element(By.xpath("//div[contains(@class,'adrese') and not(contains(@class,'epasta'))]"));
     private static final Element commentFieldBox = new Element(By.xpath("//div[contains(@class,'komentāraiebildumubūtība')]"));
-    private static final Element answerThroughOptionsBox = new Element(By.xpath("//div[contains(@class,'kāvēlossaņemtatbildi')]"));
-//    private static final Element answerThroughEmailDropdownButton = new Element(By.xpath("//div[contains(@class,'kāvēlossaņemtatbildi')]//select//option[@value='E-pasts']"));
+    private static final Element responseThroughOptionsBox = new Element(By.xpath("//div[contains(@class,'kāvēlossaņemtatbildi')]"));
 
     //div[@class="umbraco-forms-page"]//div[contains(@class,"umbraco-forms-container")]/div[not(contains(@class,"lietasnumursnavobligāts"))]//span[@class="field-validation-error"]
 
@@ -64,8 +63,8 @@ public class FormPage {
         commentFieldBox.findNestedElement(By.tagName("textarea")).sendKeys(inputText);
     }
 
-    public static void chooseAnswerOptionEmail() {
-        answerThroughOptionsBox.find().click();
-        answerThroughOptionsBox.findNestedElement(By.xpath(".//select//option[@value='E-pasts']")).click();
+    public static void chooseResponseOptionEmail(String option) {
+        responseThroughOptionsBox.find().click();
+        responseThroughOptionsBox.findNestedElement(By.xpath(".//select//option[@value='" + option + "']")).click();
     }
 }

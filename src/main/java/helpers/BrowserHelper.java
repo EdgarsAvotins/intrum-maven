@@ -20,7 +20,7 @@ public class BrowserHelper {
             String chosenBrowser = System.getProperty("browser");
             if (Objects.equals(chosenBrowser, "chrome")) {
                 System.out.println("===INITIALIZING CHROME");
-                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+//                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
                 driverThreadLocal.set(new ChromeDriver());
             } else if (Objects.equals(chosenBrowser, "firefox-headless")) {
                 System.out.println("===INITIALIZING FIREFOX HEADLESS");

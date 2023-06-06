@@ -1,14 +1,11 @@
-Feature: something1
-
-#  @smoke @test1
-#  Scenario: title1
-#    Given I wait
-#    Given I open the page
+@form
+Feature: Form
 
   @smoke
-  Scenario: title2
-    Given I open the page
-
-  @smoke
-  Scenario: title3
-    Given I do something else
+  Scenario: As a user I am able to fill and submit the form
+    Given I open the contact page
+    And I reject the cookies
+    And I open the form tab
+    When I fill in the form fields with random data
+    And I submit the form
+    Then the form is submitted

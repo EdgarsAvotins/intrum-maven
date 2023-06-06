@@ -1,7 +1,5 @@
 package dataObjects;
 
-//import io.restassured.response.Response;
-
 import java.time.Instant;
 
 public class User {
