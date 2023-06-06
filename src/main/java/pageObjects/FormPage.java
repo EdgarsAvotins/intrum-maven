@@ -74,7 +74,7 @@ public class FormPage {
     }
 
     public static void validateMandatoryFieldErrors() {
-        mandatoryFields.findList().forEach(element -> {
+        mandatoryFields.findList().forEachFoundElement(element -> {
             element.findNestedElement(By.xpath("//*[@class='field-validation-error']/span"))
                     .validateIsVisible()
                     .validateIsRGBColor("rgb(232, 62, 86)");
