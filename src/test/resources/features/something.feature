@@ -9,6 +9,6 @@ Feature: something1
   Scenario: title2
     Given I open the page
 
-#  @smoke
-#  Scenario: title3
-#    Given I do something else
+  @smoke
+  Scenario: title3
+    Given I do something else

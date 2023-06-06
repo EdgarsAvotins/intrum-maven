@@ -1,14 +1,19 @@
 package helpers;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class BrowserHelper {
-    private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     public static void initializeDriver() {
         if (driverThreadLocal.get() == null) {
@@ -45,17 +50,4 @@ public class BrowserHelper {
             driverThreadLocal.set(null);
         }
     }
-
-//        public void addScreenshotAfterTest(ExtensionContext context) throws Exception {
-//        WebDriver driver = BrowserHelper.getDriver();
-//        if (driver != null) {
-//            TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-//            File screenshotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
-//            saveScreenshot(screenshotFile, context.getDisplayName());
-//            attachScreenshotToReport(screenshotFile, context);
-//
-//            String currentUrl = driver.getCurrentUrl();
-//            Allure.addAttachment("Current URL", currentUrl);
-//        }
-//    }
 }
