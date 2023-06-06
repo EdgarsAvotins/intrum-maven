@@ -40,13 +40,22 @@ public class FormSteps {
 
     @And("I submit the form")
     public void iSubmitTheForm() {
-        // Skipping to avoid spam
-        // TODO: click submit button
+        submitForm();
     }
 
     @Then("the form is submitted")
     public void theFormIsSubmitted() {
         // assertions for what would happen if form was submitted
         // TODO: verify acceptance criteria by using assertions against the page
+    }
+
+    @And("I submit the form but not really")
+    public void iSubmitTheFormButNotReally() {
+        // Skipping to avoid spam
+    }
+
+    @Then("I see a message in red under every mandatory field of the form")
+    public void iSeeAMessageInRedUnderEveryMandatoryFieldOfTheForm() {
+        validateMandatoryFieldErrors();
     }
 }

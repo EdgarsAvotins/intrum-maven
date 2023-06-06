@@ -9,15 +9,15 @@ import java.time.Duration;
 
 import static helpers.BrowserHelper.getDriver;
 
-public class ExistingElement {
+public class FoundElement {
     private static final Duration DEFAULT_TIMEOUT = TestConfig.getDefaultTimeout();
     private WebElement currentElement;
 
-    public ExistingElement(WebElement element) {
+    public FoundElement(WebElement element) {
         this.currentElement = element;
     }
 
-    public ExistingElement(By locator) {
+    public FoundElement(By locator) {
         find(locator);
     }
 
@@ -26,17 +26,17 @@ public class ExistingElement {
         this.currentElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public WebElement getCurrentElement() {
+    public WebElement getAsSeleniumWebElement() {
         return currentElement;
     }
 
-    public ExistingElement findNestedElement(By nestedElementLocator) {
+    public FoundElement findNestedElement(By nestedElementLocator) {
         WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_TIMEOUT);
         this.currentElement = wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(currentElement, nestedElementLocator));
         return this;
     }
 
-    public ExistingElement click() {
+    public FoundElement click() {
         WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_TIMEOUT);
         wait.ignoring(ElementClickInterceptedException.class, ElementNotInteractableException.class);
         wait.until(_driver -> {
@@ -46,7 +46,7 @@ public class ExistingElement {
         return this;
     }
 
-    public ExistingElement sendKeys(String text) {
+    public FoundElement sendKeys(String text) {
         WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_TIMEOUT);
         wait.ignoring(ElementClickInterceptedException.class, ElementNotInteractableException.class);
         wait.until(_driver -> {
@@ -56,9 +56,21 @@ public class ExistingElement {
         return this;
     }
 
-    public ExistingElement scrollIntoView() {
+    public FoundElement scrollIntoView() {
         JavascriptExecutor j = (JavascriptExecutor) getDriver();
         j.executeScript ("arguments[0].scrollIntoView({block: 'center'})", currentElement);
+        return this;
+    }
+
+    public FoundElement validateIsVisible() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), DEFAULT_TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(currentElement));
+        return this;
+    }
+
+    public FoundElement validateIsRGBColor(String rgb) {
+        String actualHex = getAsSeleniumWebElement().getCssValue("color");
+        assert(rgb.equals(actualHex));
         return this;
     }
 }

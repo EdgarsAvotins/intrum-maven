@@ -14,19 +14,19 @@ import static pageObjects.FormPage.*;
 
 public class Hooks {
     @Before
-    public static void setup() {
+    public void setup() {
         initializeDriver();
     }
 
     @After
-    public static void teardown(Scenario scenario) {
+    public void teardown(Scenario scenario) {
         if (getDriver() != null) {
             addScreenshot(scenario);
             closeDriver();
         }
     }
 
-    private static void addScreenshot(Scenario scenario) {
+    private void addScreenshot(Scenario scenario) {
         WebDriver driver = getDriver();
         byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(screenshot, "image/png", "SCREENSHOT");

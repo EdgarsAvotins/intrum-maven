@@ -9,11 +9,11 @@ public class Element {
         this.locator = locator;
     }
 
-    public ExistingElement find() {
-        return new ExistingElement(locator);
+    public FoundElement find() {
+        return new FoundElement(locator);
     }
 
-    public ExistingElement findNestedElement(By nestedLocator) {
-        return new ExistingElement(locator).findNestedElement(nestedLocator);
+    public FoundElement findNestedElement(By nestedLocator) {
+        return new FoundElement(locator).findNestedElement(nestedLocator);
     }
 }

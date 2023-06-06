@@ -2,6 +2,7 @@ package pageObjects;
 
 import config.TestConfig;
 import helpers.Element;
+import helpers.ElementList;
 import org.openqa.selenium.By;
 
 import static helpers.BrowserHelper.navigateTo;
@@ -20,8 +21,8 @@ public class FormPage {
     private static final Element personalAddressFieldBox = new Element(By.xpath("//div[contains(@class,'adrese') and not(contains(@class,'epasta'))]"));
     private static final Element commentFieldBox = new Element(By.xpath("//div[contains(@class,'komentāraiebildumubūtība')]"));
     private static final Element responseThroughOptionsBox = new Element(By.xpath("//div[contains(@class,'kāvēlossaņemtatbildi')]"));
-
-    //div[@class="umbraco-forms-page"]//div[contains(@class,"umbraco-forms-container")]/div[not(contains(@class,"lietasnumursnavobligāts"))]//span[@class="field-validation-error"]
+    private static final Element submitFormButton = new Element(By.xpath("//div[@id='slide']//input[@type='submit']"));
+    private static final ElementList mandatoryFields = new ElementList(By.xpath("//div[contains(@class,'mandatory')]"));
 
     public static void openHomepage() {
         navigateTo(DOMAIN_URL);
@@ -66,5 +67,17 @@ public class FormPage {
     public static void chooseResponseOptionEmail(String option) {
         responseThroughOptionsBox.find().click();
         responseThroughOptionsBox.findNestedElement(By.xpath(".//select//option[@value='" + option + "']")).click();
+    }
+
+    public static void submitForm() {
+        submitFormButton.find().click();
+    }
+
+    public static void validateMandatoryFieldErrors() {
+        mandatoryFields.findList().forEach(element -> {
+            element.findNestedElement(By.xpath("//*[@class='field-validation-error']/span"))
+                    .validateIsVisible()
+                    .validateIsRGBColor("rgb(232, 62, 86)");
+        });
     }
 }
