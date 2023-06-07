@@ -46,7 +46,7 @@ public class FormSteps {
     @Then("the form is submitted")
     public void theFormIsSubmitted() {
         // assertions for what would happen if form was submitted
-        // TODO: verify acceptance criteria by using assertions against the page
+        // TODO: verify acceptance criteria by using assertions against the page (if this was an actual project)
     }
 
     @And("I submit the form but not really")
